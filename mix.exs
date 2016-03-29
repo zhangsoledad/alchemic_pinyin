@@ -3,13 +3,15 @@ defmodule Pinyin.Mixfile do
 
   def project do
     [app: :alchemic_pinyin,
-     version: "0.0.1",
+     version: "0.1.0",
      elixir: "~> 1.2",
      description: description,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      package: package,
-     deps: deps]
+     deps: deps,
+     docs: [extras: ["README.md"] ]
+     ]
   end
 
   # Configuration for the OTP application
@@ -20,7 +22,9 @@ defmodule Pinyin.Mixfile do
   end
 
   defp deps do
-    [{:benchfella, "~> 0.3.0", only: :dev}]
+    [{:benchfella, "~> 0.3.0", only: :dev},
+    {:earmark, "~> 0.1", only: :dev},
+    {:ex_doc, "~> 0.11", only: :dev}]
   end
 
   defp description do

@@ -1,20 +1,53 @@
 # Pinyin
 
-**TODO: Add description**
+中文汉字转拼音
+>Inspired by [chinese_pinyin](https://github.com/flyerhzm/chinese_pinyin).
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+1. Add pinyin to your list of dependencies in `mix.exs`:
+```elixir
+def deps do
+  [{:alchemic_pinyin, "~> 0.1.0"}]
+end
+```
 
-  1. Add pinyin to your list of dependencies in `mix.exs`:
+2. Ensure pinyin is started before your application:
+```elixir
+def application do
+  [applications: [:alchemic_pinyin]]
+end
+```
 
-        def deps do
-          [{:pinyin, "~> 0.0.1"}]
-        end
+## Usage
+```bash
+iex> Pinyin.from_string("龡龢龣龤龥癩")
+"chui he jue xie yu la"
+iex> Pinyin.from_string("龡龢龣龤龥癩", tone: true)
+"chùi hé júe xíe yù là"
+iex> Pinyin.from_string("龡龢龣龤龥癩", splitter: "-")
+"chui-he-jue-xie-yu-la"
+iex> Pinyin.from_string("龡龢龣龤龥癩", [], &String.first/1)
+"c"
+```
 
-  2. Ensure pinyin is started before your application:
+## benchmark
+```
+mix bench
+```
+OS X
 
-        def application do
-          [applications: [:pinyin]]
-        end
+2.7 GHz Intel Core i5
+8 GB 1867 MHz DDR3
+```bash
+Settings:
+  duration:      1.0 s
 
+BasicBench
+  [14:01:23] 1/1: hello pinyin
+
+Finished in 4.11 seconds
+
+BasicBench
+  hello pinyin      500000   6.73 µs/op
+```
