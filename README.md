@@ -1,4 +1,4 @@
-# Pinyin
+# alchemic_pinyin [![Build Status](https://travis-ci.org/zhangsoledad/alchemic_pinyin.svg?branch=master)](https://travis-ci.org/zhangsoledad/alchemic_pinyin.svg?branch=master)
 
 中文汉字转拼音
 >Inspired by [chinese_pinyin](https://github.com/flyerhzm/chinese_pinyin).
