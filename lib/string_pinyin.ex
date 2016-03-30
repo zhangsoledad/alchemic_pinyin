@@ -87,4 +87,8 @@ defmodule String.Pinyin do
     ( char >= 65 and char <= 90 ) or # A-Z
     ( char >= 48 and char <= 57 )) # 0-9
   end
+
+  defp add_splitter?(_) do
+    false
+  end
 end
