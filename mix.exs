@@ -24,7 +24,8 @@ defmodule Pinyin.Mixfile do
   defp deps do
     [{:benchfella, "~> 0.3.0", only: :dev},
     {:earmark, "~> 0.1", only: :dev},
-    {:ex_doc, "~> 0.11", only: :dev}]
+    {:ex_doc, "~> 0.11", only: :dev},
+    {:dialyze, "~> 0.2.0", only: :dev}]
   end
 
   defp description do
