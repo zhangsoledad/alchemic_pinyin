@@ -2,7 +2,7 @@ defmodule String.Pinyin do
   @moduledoc ~S"""
   A Pinyin Libary.
   """
-  data_path = Path.join(__DIR__, "data/pinyin.dat")
+  @external_resource data_path = Path.join(__DIR__, "data/pinyin.dat")
 
   pinyin_codes = Enum.reduce File.stream!(data_path), [], fn(line, acc) ->
     [han, pinyin, tone, pinyin_with_tone ]  = line
@@ -30,9 +30,13 @@ defmodule String.Pinyin do
   end
 
   #do_to_pinyin
-  for {han, pinyin, _tone, _pinyin_with_tone} <- pinyin_codes do
+  for {han, pinyin, _tone, pinyin_with_tone} <- pinyin_codes do
     defp do_to_pinyin(unquote(han) <> rest, acc, splitter) do
       do_to_pinyin(rest, do_acc(acc, splitter, unquote(pinyin), rest), splitter)
+    end
+
+    defp do_to_pinyin_tone(unquote(han) <> rest, acc, splitter) do
+      do_to_pinyin_tone(rest, do_acc(acc, splitter, unquote(pinyin_with_tone), rest), splitter)
     end
   end
 
@@ -47,15 +51,6 @@ defmodule String.Pinyin do
   end
 
   defp do_to_pinyin("", acc, _splitter), do: acc
-  #do_to_pinyin
-
-
-  #do_to_pinyin_tone
-  for {han, _pinyin, _tone, pinyin_with_tone} <- pinyin_codes do
-    defp do_to_pinyin_tone(unquote(han) <> rest, acc, splitter) do
-      do_to_pinyin_tone(rest, do_acc(acc, splitter, unquote(pinyin_with_tone), rest), splitter)
-    end
-  end
 
   defp do_to_pinyin_tone(<<char, rest::binary>>, acc, splitter) do
     case rest |> String.first |> add_splitter? do

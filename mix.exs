@@ -3,7 +3,7 @@ defmodule Pinyin.Mixfile do
 
   def project do
     [app: :alchemic_pinyin,
-     version: "0.1.1",
+     version: "0.1.2",
      elixir: "~> 1.2",
      description: description,
      build_embedded: Mix.env == :prod,
