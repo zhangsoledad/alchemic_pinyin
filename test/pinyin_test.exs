@@ -1,6 +1,5 @@
 defmodule PinyinTest do
   use ExUnit.Case, async: true
-  doctest Pinyin
 
   @pure_hanzi "龡龢龣龤龥癩什么鬼东西"
   @hanzi_eng "a龡dsa龢dsa龣龤das龥癩dasdas什么das鬼东西dad"

@@ -26,7 +26,8 @@ defmodule Pinyin.Mixfile do
     {:earmark, "~> 0.1", only: :dev},
     {:ex_doc, "~> 0.11", only: :dev},
     {:dialyze, "~> 0.2.0", only: :dev},
-    {:inch_ex, "~> 0.5", only: :docs}]
+    {:inch_ex, "~> 0.5", only: :docs},
+    {:progress_bar, "> 0.0.0"}]
   end
 
   defp description do

@@ -4,12 +4,16 @@ defmodule String.Pinyin do
   """
   @external_resource data_path = Path.join(__DIR__, "data/pinyin.dat")
 
-  pinyin_codes = Enum.reduce File.stream!(data_path), [], fn(line, acc) ->
+  file_stream = File.stream!(data_path) |> Stream.with_index
+
+  pinyin_codes = Enum.reduce(file_stream, [], fn({line, index}, acc) ->
     [han, pinyin, tone, pinyin_with_tone ]  = line
     |> String.rstrip(?\n)
     |> :binary.split(";", [:global])
-    [ { han, pinyin, tone, pinyin_with_tone } | acc ]
-  end
+    [ { han, pinyin, tone, pinyin_with_tone , index} | acc ]
+  end) |> Enum.reverse
+
+  line_count = length(pinyin_codes)
 
   def to_pinyin(string) do
     to_pinyin(string, [])
@@ -30,7 +34,8 @@ defmodule String.Pinyin do
   end
 
   #do_to_pinyin
-  for {han, pinyin, _tone, pinyin_with_tone} <- pinyin_codes do
+  for {han, pinyin, _tone, pinyin_with_tone, index} <- pinyin_codes do
+    ProgressBar.render(index , line_count)
     defp do_to_pinyin(unquote(han) <> rest, acc, splitter) do
       do_to_pinyin(rest, do_acc(acc, splitter, unquote(pinyin), rest), splitter)
     end
