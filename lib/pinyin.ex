@@ -14,9 +14,9 @@ defimpl Pinyin, for: BitString do
   @spec from_string(binary) :: binary
   defdelegate from_string(string), to: String.Pinyin, as: :to_pinyin
 
-  @spec from_string(binary, Keyword.t) :: binary
+  @spec from_string(binary, Keyword.t()) :: binary
   defdelegate from_string(string, opts), to: String.Pinyin, as: :to_pinyin
 
-  @spec from_string(binary, Keyword.t, (binary -> any)) :: any
+  @spec from_string(binary, Keyword.t(), (binary -> any)) :: any
   defdelegate from_string(string, opts, fun), to: String.Pinyin, as: :to_pinyin
 end
